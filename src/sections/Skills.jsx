@@ -83,8 +83,8 @@ const Skills = () => {
     wrapLines={true}
     showLineNumbers
     customStyle={{
-      whiteSpace: "pre-wrap",      // permite saltos de línea
-      overflowWrap: "anywhere",    // rompe solo si no cabe en la línea
+      whiteSpace: "pre-wrap",     
+      overflowWrap: "anywhere",    
       wordBreak: "break-word", 
       width: "80%",
       margin: "0 auto",

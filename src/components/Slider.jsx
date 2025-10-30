@@ -2,12 +2,12 @@
 import React, { useRef } from "react";
 
 const VIDEOS = [
-  { title: "Blender", src: "../src/assets/video1.mp4" },
-  { title: "Blender 1", src: "../src/assets/video2.mp4" },
-  { title: "Blender 2", src: "../src/assets/video3.mp4" },
-  { title: "Blender 3", src: "../src/assets/video4.mp4" },
-  { title: "Blender 5", src: "../src/assets/video5.mp4" },
-  { title: "Blender 6", src: "../src/assets/video6.mp4" },
+  { title: "Blender", src: "/videos/video1.mp4" },
+  { title: "Blender 1", src: "/videos/video2.mp4" },
+  { title: "Blender 2", src: "/videos/video3.mp4" },
+  { title: "Blender 3", src: "/videos/video4.mp4" },
+  { title: "Blender 5", src: "/videos/video5.mp4" },
+  { title: "Blender 6", src: "/videos/video6.mp4" },
 ];
 
 const Slider = () => {
