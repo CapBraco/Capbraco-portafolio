@@ -1,0 +1,522 @@
+/* src/sections/SkillsCircle.css - CLEAN VERSION */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,300;1,400&display=swap');
+
+.skills-section-luxury {
+  background: #000;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle particle starfield background */
+.skills-section-luxury::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: 
+    radial-gradient(2px 2px at 20% 30%, rgba(0, 180, 216, 0.2), transparent),
+    radial-gradient(2px 2px at 60% 70%, rgba(255, 140, 80, 0.15), transparent),
+    radial-gradient(1px 1px at 50% 50%, rgba(0, 180, 216, 0.1), transparent),
+    radial-gradient(1px 1px at 80% 10%, rgba(255, 140, 80, 0.15), transparent),
+    radial-gradient(2px 2px at 90% 60%, rgba(0, 180, 216, 0.2), transparent),
+    radial-gradient(1px 1px at 33% 80%, rgba(255, 140, 80, 0.1), transparent);
+  background-size: 200% 200%;
+  animation: particleFloat 20s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes particleFloat {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(-10px, -10px); }
+}
+
+.skills-container-luxury {
+  max-width: 1400px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 40% 60%;
+  gap: 2rem;
+  align-items: center;
+}
+
+/* Photo Section - NO SHADOW */
+.skills-photo-luxury {
+  position: relative;
+  height: 85vh;
+  max-height: 700px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-image-luxury {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  filter: grayscale(5%) contrast(1.2) brightness(0.95);
+  position: relative;
+  z-index: 1;
+  border-radius: 4px;
+}
+
+/* Orbital Container */
+.skills-orbital-container {
+  position: relative;
+  height: 85vh;
+  max-height: 700px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Title - TOP LEFT */
+.skills-title-luxury {
+  position: absolute;
+  top: 1%;
+  left: 5%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  z-index: 10;
+}
+
+.title-line-luxury {
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: 0.3em;
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+  line-height: 1.2;
+  font-family: 'Playfair Display', serif;
+}
+
+.title-main-luxury {
+  font-size: 2.2rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #fff;
+  text-transform: uppercase;
+  line-height: 1.2;
+  font-family: 'Playfair Display', serif;
+  background: linear-gradient(135deg, #fff, #64c8d8, #ff8c50);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Orbital System - NO SHINE EFFECT */
+.orbital-system {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  max-width: 650px;
+  max-height: 650px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Particles background */
+.particles-bg {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    radial-gradient(1px 1px at 25% 15%, rgba(0, 180, 216, 0.3), transparent),
+    radial-gradient(1px 1px at 75% 85%, rgba(255, 140, 80, 0.25), transparent),
+    radial-gradient(2px 2px at 45% 55%, rgba(0, 180, 216, 0.2), transparent);
+  opacity: 0.6;
+  animation: particleGlow 4s ease-in-out infinite;
+}
+
+@keyframes particleGlow {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.7; }
+}
+
+/* Orbital Rings SVG */
+.orbital-rings {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  filter: drop-shadow(0 0 8px rgba(0, 180, 216, 0.4));
+}
+
+/* Ring animations - ROTATING */
+.ring-outer-1 {
+  animation: orbitSlow 60s linear infinite;
+  transform-origin: center;
+}
+
+.ring-outer-2 {
+  animation: orbitSlow 45s linear infinite reverse;
+  transform-origin: center;
+}
+
+.ring-outer-3 {
+  animation: orbitSlow 35s linear infinite;
+  transform-origin: center;
+}
+
+.ring-inner-1 {
+  animation: orbitFast 30s linear infinite reverse;
+  transform-origin: center;
+}
+
+.ring-inner-2 {
+  animation: orbitFast 25s linear infinite;
+  transform-origin: center;
+}
+
+.core-ring-1 {
+  animation: coreRingSpin 8s linear infinite;
+  transform-origin: center;
+}
+
+.core-ring-2 {
+  animation: coreRingSpin 6s linear infinite reverse;
+  transform-origin: center;
+}
+
+.core-ring-3 {
+  animation: coreRingSpin 4s linear infinite;
+  transform-origin: center;
+}
+
+@keyframes orbitSlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes orbitFast {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes coreRingSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Skill Nodes - FULL CIRCLE */
+.skill-nodes-luxury {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+}
+
+.skill-node-luxury {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.skill-node-luxury.active {
+  opacity: 1;
+  animation: nodeAppear 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes nodeAppear {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.3);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+/* Node glow container - NO PULSE RING */
+.node-glow-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Node dot - alternating cyan/orange borders, NO BREATHING */
+.node-dot-luxury {
+  position: relative;
+  width: 75px;
+  height: 75px;
+  background: radial-gradient(circle at 30% 30%, rgba(20, 30, 35, 0.98), rgba(10, 15, 20, 1));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 
+    0 0 0 2px rgba(0, 180, 216, 0.6),
+    0 0 15px rgba(0, 180, 216, 0.5),
+    0 0 30px rgba(0, 180, 216, 0.3),
+    inset 0 2px 10px rgba(0, 0, 0, 0.9);
+  cursor: pointer;
+  transition: all 0.4s ease;
+  backdrop-filter: blur(10px);
+}
+
+.skill-node-luxury:nth-child(even) .node-dot-luxury {
+  box-shadow: 
+    0 0 0 2px rgba(255, 140, 80, 0.6),
+    0 0 15px rgba(255, 140, 80, 0.5),
+    0 0 30px rgba(255, 140, 80, 0.3),
+    inset 0 2px 10px rgba(0, 0, 0, 0.9);
+}
+
+.node-dot-luxury::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 50%;
+  padding: 2px;
+  background: linear-gradient(135deg, rgba(0, 180, 216, 0.9), rgba(100, 200, 255, 0.5));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0.9;
+}
+
+.skill-node-luxury:nth-child(even) .node-dot-luxury::before {
+  background: linear-gradient(135deg, rgba(255, 140, 80, 0.9), rgba(255, 107, 53, 0.5));
+}
+
+.dot-inner-luxury {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, rgba(0, 180, 216, 0.15), transparent 70%);
+}
+
+.skill-node-luxury:nth-child(even) .dot-inner-luxury {
+  background: radial-gradient(circle at 30% 30%, rgba(255, 140, 80, 0.15), transparent 70%);
+}
+
+.node-dot-luxury:hover {
+  transform: scale(1.15);
+  box-shadow: 
+    0 0 0 3px rgba(0, 180, 216, 1),
+    0 0 25px rgba(0, 180, 216, 0.8),
+    0 0 50px rgba(0, 180, 216, 0.5),
+    inset 0 2px 10px rgba(0, 0, 0, 0.9);
+}
+
+.skill-node-luxury:nth-child(even) .node-dot-luxury:hover {
+  box-shadow: 
+    0 0 0 3px rgba(255, 140, 80, 1),
+    0 0 25px rgba(255, 140, 80, 0.8),
+    0 0 50px rgba(255, 140, 80, 0.5),
+    inset 0 2px 10px rgba(0, 0, 0, 0.9);
+}
+
+/* Modern React Icons */
+.node-icon-luxury {
+  font-size: 2rem;
+  filter: drop-shadow(0 2px 10px rgba(0, 180, 216, 0.6));
+  color: rgba(100, 200, 255, 0.95);
+}
+
+.skill-node-luxury:nth-child(even) .node-icon-luxury {
+  filter: drop-shadow(0 2px 10px rgba(255, 140, 80, 0.6));
+  color: rgba(255, 160, 100, 0.95);
+}
+
+/* Skill Label */
+.skill-label-luxury {
+  position: absolute;
+  top: calc(100% + 15px);
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  pointer-events: none;
+  text-align: center;
+  max-width: 240px;
+}
+
+.skill-name-luxury {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.9rem;
+  font-weight: 400;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.9);
+  letter-spacing: 0.03em;
+  display: block;
+  line-height: 1.4;
+  text-shadow: 
+    0 0 8px rgba(0, 180, 216, 0.4),
+    0 2px 8px rgba(0, 0, 0, 0.9);
+}
+
+/* Central Power Core - BORDER ROTATES, ICON STATIC */
+.power-core {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  width: 80px;
+  height: 80px;
+}
+
+.core-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120px;
+  height: 120px;
+  background: radial-gradient(circle, rgba(0, 180, 216, 0.5) 0%, transparent 70%);
+  filter: blur(20px);
+  animation: coreGlowPulse 3s ease-in-out infinite;
+}
+
+@keyframes coreGlowPulse {
+  0%, 100% { 
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.5;
+  }
+  50% { 
+    transform: translate(-50%, -50%) scale(1.2);
+    opacity: 0.8;
+  }
+}
+
+/* Rotating border container */
+.core-border-rotate {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 2px solid transparent;
+  border-top-color: rgba(0, 180, 216, 0.8);
+  border-right-color: rgba(0, 180, 216, 0.6);
+  border-radius: 50%;
+  animation: coreBorderSpin 3s linear infinite;
+}
+
+@keyframes coreBorderSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Static inner core */
+.core-inner-static {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80px;
+  height: 80px;
+  background: radial-gradient(circle at 30% 30%, rgba(0, 180, 216, 0.3), rgba(10, 20, 25, 1));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 
+    0 0 0 2px rgba(0, 180, 216, 0.7),
+    0 0 20px rgba(0, 180, 216, 0.6),
+    0 0 40px rgba(0, 180, 216, 0.3),
+    inset 0 0 30px rgba(0, 0, 0, 0.9);
+}
+
+.core-icon {
+  font-size: 2.2rem;
+  filter: drop-shadow(0 0 8px rgba(0, 180, 216, 0.9));
+  color: rgba(100, 200, 255, 0.95);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .skills-container-luxury {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .skills-photo-luxury {
+    height: 50vh;
+    max-height: 400px;
+  }
+
+  .skills-orbital-container {
+    height: 70vh;
+  }
+
+  .orbital-system {
+    max-width: 500px;
+    max-height: 500px;
+    aspect-ratio: 1 / 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .skills-section-luxury {
+    padding: 1rem;
+  }
+
+  .skills-container-luxury {
+    gap: 2rem;
+  }
+
+  .skills-photo-luxury {
+    height: 40vh;
+    max-height: 350px;
+  }
+
+  .skills-orbital-container {
+    height: 60vh;
+  }
+
+  .orbital-system {
+    max-width: 400px;
+    max-height: 400px;
+    width: 90vw;
+    height: 90vw;
+    max-width: min(400px, 90vw);
+    max-height: min(400px, 90vw);
+    aspect-ratio: 1 / 1;
+  }
+
+  .title-main-luxury {
+    font-size: 1.5rem;
+  }
+
+  .title-line-luxury {
+    font-size: 0.85rem;
+  }
+
+  .node-dot-luxury {
+    width: 60px;
+    height: 60px;
+  }
+
+  .node-icon-luxury {
+    font-size: 1.6rem;
+  }
+
+  .core-inner-static {
+    width: 65px;
+    height: 65px;
+  }
+  
+  .core-icon {
+    font-size: 1.8rem;
+  }
+  
+  .skill-name-luxury {
+    font-size: 0.75rem;
+    max-width: 180px;
+  }
+}

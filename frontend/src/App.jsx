@@ -1,25 +1,31 @@
-import Navbar from "./components/Navbar";
-import Hero from "./sections/Hero";
-import About from "./sections/About";
-import Projects from "./sections/Projects";
-import Skills from "./sections/Skills";
-import Contact from "./sections/Contact";
-import Footer from "./components/Footer";
-import "./styles/global.css";
-import Slider from "./components/Slider";
+// src/App.jsx
+import { useState } from 'react';
+import Hero from './components/Hero';
+import HeroIntro from './sections/HeroIntro'; // NEW
+import SkillsCircle from './sections/SkillsCircle';
+import Slider from './sections/Slider';
+import './App.css';
+import Resume from './sections/Resume';
+import Carousel from './sections/Carousel';
+import Contact from './sections/Contact';
 
-function App(){
+function App() {
+  const [showHero, setShowHero] = useState(true);
+
+  const handleBurnComplete = () => {
+    setShowHero(false);
+  };
+
   return (
-    <div>
-      <Navbar />
-      <Hero />
-      <About />
-      <Projects />
-      <Slider/>
-      <Skills/>
-      <Contact />
-      <Footer />
-    </div>
+    <div className="App">
+      <HeroIntro />
+      {showHero && <Hero onBurnComplete={handleBurnComplete} />}
+        <SkillsCircle />
+        <Slider />
+        <Carousel />
+        <Resume />
+        <Contact />
+      </div>
   );
 }
 

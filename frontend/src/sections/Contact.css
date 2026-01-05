@@ -1,0 +1,355 @@
+/* src/sections/Contact.css - PORTFOLIO IDENTITY */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Fira+Code:wght@400;500&display=swap');
+
+.contact-section {
+  background: #000;
+  min-height: 100vh;
+  padding: 4rem 2rem;
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+}
+
+/* Background grid like original */
+.contact-section::before {
+  --size: 45px;
+  --line: rgba(255, 255, 255, 0.08);
+
+  content: '';
+  position: absolute;
+  inset: 0;               /* replaces top/left/width/height */
+  width: 100%;
+  height: 100%;
+
+  background:
+    linear-gradient(90deg, var(--line) 1px, transparent 1px var(--size))
+      calc(var(--size) * 0.36) 50% / var(--size) var(--size),
+    linear-gradient(var(--line) 1px, transparent 1px var(--size))
+      0% calc(var(--size) * 0.32) / var(--size) var(--size);
+
+  mask: linear-gradient(-20deg, transparent 50%, white);
+  pointer-events: none;
+  z-index: 0;
+}
+.contact-section > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Remove particles */
+.contact-particles {
+  display: none;
+}
+
+.contact-main {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3rem;
+  align-items: center;
+  justify-content: center;
+  max-width: 1200px;
+  width: 100%;
+}
+
+/* Content Section */
+.contact-content {
+  flex: 1;
+  min-width: min(400px, 100%);
+  max-width: 500px;
+}
+
+.contact-header {
+  margin-bottom: 1rem;
+}
+
+.bracket-left,
+.bracket-right {
+  display: none;
+}
+
+.contact-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 400;
+  letter-spacing: -0.05rem;
+  line-height: 1;
+  color: #fff;
+  margin: 0 0 1.5rem 0;
+}
+
+.contact-subtitle {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 300;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+/* Form Styling */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 500;
+}
+
+.form-group input,
+.form-group textarea {
+  font-family: 'Cormorant Garamond', serif;
+  padding: 0.75rem 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  color: #fff;
+  transition: all 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.keypad-hint {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.5);
+  margin-top: 0.5rem;
+}
+
+/* 3D Keypad Styling - ORIGINAL STRUCTURE */
+:root {
+  --travel: 20;
+}
+
+.keypad {
+  position: relative;
+  aspect-ratio: 400 / 310;
+  display: flex;
+  place-items: center;
+  width: clamp(280px, 35vw, 400px);
+  -webkit-tap-highlight-color: transparent;
+  transition-property: translate, transform;
+  transition-duration: 0.26s;
+  transition-timing-function: ease-out;
+  transform-style: preserve-3d;
+  opacity: 0;
+  transition: opacity 0.6s ease-out;
+}
+
+.key {
+  transform-style: preserve-3d;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  outline: none;
+}
+
+.key[data-pressed='true'],
+.key:active {
+  .key__content {
+    translate: 0 calc(var(--travel) * 1%);
+  }
+}
+
+.key__content {
+  width: 100%;
+  display: inline-block;
+  height: 100%;
+  transition: translate 0.12s ease-out;
+  container-type: inline-size;
+}
+
+.keypad__single .key__text {
+  width: 52%;
+  height: 62%;
+  translate: 45% -16%;
+}
+
+.key__text {
+  height: 46%;
+  width: 86%;
+  position: absolute;
+  font-size: 12cqi;
+  z-index: 21;
+  top: 5%;
+  left: 0;
+  color: hsl(0 0% 94%);
+  translate: 8% 10%;
+  transform: rotateX(36deg) rotateY(45deg) rotateX(-90deg) rotate(0deg);
+  text-align: left;
+  padding: 1ch;
+  font-family: 'SF Pro Text', 'SF Pro Icons', 'Helvetica Neue', Helvetica, Arial, sans-serif, system-ui;
+}
+
+.keypad__single {
+  position: absolute;
+  width: 40.5%;
+  left: 54%;
+  bottom: 36%;
+  height: 46%;
+  clip-path: polygon(
+    0 0,
+    54% 0,
+    89% 24%,
+    100% 70%,
+    54% 100%,
+    46% 100%,
+    0 69%,
+    12% 23%,
+    47% 0%
+  );
+  mask: url(https://assets.codepen.io/605876/keypad-single.png?format=auto&quality=86) 50% 50% / 100% 100%;
+}
+
+.keypad__single.keypad__single--left {
+  left: 29.3%;
+  bottom: 54.2%;
+}
+
+.keypad__single .key__text {
+  font-size: 18cqi;
+}
+
+.keypad__single img {
+  top: 0;
+  opacity: 1;
+  width: 96%;
+  position: absolute;
+  left: 50%;
+  translate: -50% 1%;
+}
+
+.key__mask {
+  width: 100%;
+  height: 100%;
+  display: inline-block;
+}
+
+.keypad__double {
+  position: absolute;
+  background: hsl(10 100% 50% / 0);
+  width: 64%;
+  height: 65%;
+  left: 6%;
+  bottom: 17.85%;
+  clip-path: polygon(
+    34% 0,
+    93% 44%,
+    101% 78%,
+    71% 100%,
+    66% 100%,
+    0 52%,
+    0 44%,
+    7% 17%,
+    30% 0
+  );
+  mask: url(https://assets.codepen.io/605876/keypad-double.png?format=auto&quality=86) 50% 50% / 100% 100%;
+}
+
+.keypad__double img {
+  top: 0;
+  opacity: 1;
+  width: 99%;
+  position: absolute;
+  left: 50%;
+  translate: -50% 1%;
+}
+
+.key img {
+  filter: hue-rotate(calc(var(--hue, 0) * 1deg))
+    saturate(var(--saturate, 1)) brightness(var(--brightness, 1));
+  transition: translate 0.12s ease-out;
+  width: 100%;
+}
+
+.keypad__base {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+.keypad__base img {
+  width: 100%;
+  transition: translate 0.12s ease-out;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .contact-main {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .contact-content {
+    order: 1;
+  }
+
+  .keypad {
+    order: 2;
+    width: clamp(240px, 70vw, 350px);
+  }
+
+  .contact-header {
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .contact-title {
+    font-size: 1.5rem;
+  }
+
+  .bracket-left,
+  .bracket-right {
+    font-size: 1.5rem;
+  }
+
+  .contact-subtitle {
+    font-size: 1rem;
+    text-align: left;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-section {
+    padding: 2rem 1rem;
+  }
+
+  .keypad {
+    width: 90vw;
+    max-width: 280px;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    font-size: 0.9rem;
+    padding: 0.65rem 0.85rem;
+  }
+}
