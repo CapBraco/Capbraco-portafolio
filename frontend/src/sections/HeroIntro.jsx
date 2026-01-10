@@ -1,4 +1,3 @@
-// src/sections/HeroIntro.jsx
 import { useEffect, useState } from 'react';
 import './HeroIntro.css';
 

@@ -1,4 +1,4 @@
-/* src/sections/SkillsCircle.css - CLEAN VERSION */
+/* src/sections/SkillsCircle.css - MOBILE RESPONSIVE VERSION */
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,300;1,400&display=swap');
 
 .skills-section-luxury {
@@ -43,7 +43,7 @@
   align-items: center;
 }
 
-/* Photo Section - NO SHADOW */
+/* Photo Section - MOBILE RESPONSIVE */
 .skills-photo-luxury {
   position: relative;
   height: 85vh;
@@ -51,6 +51,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
+  border-radius: 4px;
 }
 
 .profile-image-luxury {
@@ -111,7 +113,7 @@
   background-clip: text;
 }
 
-/* Orbital System - NO SHINE EFFECT */
+/* Orbital System */
 .orbital-system {
   position: relative;
   width: 100%;
@@ -237,7 +239,7 @@
   }
 }
 
-/* Node glow container - NO PULSE RING */
+/* Node glow container */
 .node-glow-container {
   position: relative;
   display: flex;
@@ -245,7 +247,7 @@
   justify-content: center;
 }
 
-/* Node dot - alternating cyan/orange borders, NO BREATHING */
+/* Node dot - alternating cyan/orange borders */
 .node-dot-luxury {
   position: relative;
   width: 75px;
@@ -359,7 +361,7 @@
     0 2px 8px rgba(0, 0, 0, 0.9);
 }
 
-/* Central Power Core - BORDER ROTATES, ICON STATIC */
+/* Central Power Core */
 .power-core {
   position: absolute;
   top: 50%;
@@ -438,7 +440,7 @@
   color: rgba(100, 200, 255, 0.95);
 }
 
-/* Responsive */
+/* Responsive - Tablet */
 @media (max-width: 1024px) {
   .skills-container-luxury {
     grid-template-columns: 1fr;
@@ -448,6 +450,11 @@
   .skills-photo-luxury {
     height: 50vh;
     max-height: 400px;
+    width: 100%;
+  }
+
+  .profile-image-luxury {
+    object-position: top;
   }
 
   .skills-orbital-container {
@@ -461,6 +468,7 @@
   }
 }
 
+/* Responsive - Mobile */
 @media (max-width: 768px) {
   .skills-section-luxury {
     padding: 1rem;
@@ -473,6 +481,13 @@
   .skills-photo-luxury {
     height: 40vh;
     max-height: 350px;
+    width: 100%;
+    border-radius: 8px;
+  }
+
+  .profile-image-luxury {
+    object-position: top;
+    border-radius: 8px;
   }
 
   .skills-orbital-container {
@@ -518,5 +533,61 @@
   .skill-name-luxury {
     font-size: 0.75rem;
     max-width: 180px;
+  }
+}
+
+/* Responsive - Small Mobile */
+@media (max-width: 480px) {
+  .skills-photo-luxury {
+    height: 35vh;
+    max-height: 300px;
+    width: 100%;
+  }
+
+  .profile-image-luxury {
+    object-position: top 20%;
+  }
+  .skills-orbital-container {
+    height: 55vh;
+  }
+
+  .orbital-system {
+    max-width: 320px;
+    max-height: 320px;
+    width: 85vw;
+    height: 85vw;
+    max-width: min(320px, 85vw);
+    max-height: min(320px, 85vw);
+  }
+
+  .node-dot-luxury {
+    width: 50px;
+    height: 50px;
+  }
+
+  .node-icon-luxury {
+    font-size: 1.3rem;
+  }
+
+  .core-inner-static {
+    width: 55px;
+    height: 55px;
+  }
+  
+  .core-icon {
+    font-size: 1.5rem;
+  }
+
+  .skill-name-luxury {
+    font-size: 0.7rem;
+    max-width: 150px;
+  }
+
+  .title-main-luxury {
+    font-size: 1.2rem;
+  }
+
+  .title-line-luxury {
+    font-size: 0.75rem;
   }
 }

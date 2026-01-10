@@ -57,8 +57,8 @@ const SkillsCircle = () => {
         {/* Left side - Your photo */}
         <div className="skills-photo-luxury">
           <img 
-            src="/profile.png" 
-            alt="Cap Braco" 
+            src="https://assets.capbraco.com/images/profile.webp" 
+            alt="Bryan A Paucar profile" 
             className="profile-image-luxury"
           />
         </div>

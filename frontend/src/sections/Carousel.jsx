@@ -5,36 +5,37 @@ import './Carousel.css';
 
 const VIDEOS = [
   { 
-    title: "Blender Project", 
-    description: "Advanced 3D modeling and animation showcase",
-    src: "./videos/video1.mp4" 
+    title: "UNASUR Building — Architectural Visualization",
+    description: "High-fidelity 3D modeling and photorealistic rendering of the UNASUR headquarters in Quito, Ecuador.",
+    src: "https://assets.capbraco.com/videos/project-1.mp4"
   },
   { 
-    title: "3D Animation", 
-    description: "Character rigging and motion capture work",
-    src: "./videos/video2.mp4" 
+    title: "Cinematic 3D Environment — Motion & Tracking",
+    description: "Cinematic-style 3D scene with camera tracking and environmental storytelling, designed for commercials and digital product visuals.",
+    src: "https://assets.capbraco.com/videos/project-2.mp4"
   },
   { 
-    title: "Motion Design", 
-    description: "Dynamic typography and visual storytelling",
-    src: "./videos/video3.mp4" 
+    title: "Lutweb Product Render — Camera Motion Study",
+    description: "Realistic product visualization featuring branded elements, precision lighting, and smooth zoom and rotation camera movement.",
+    src: "https://assets.capbraco.com/videos/project-3.mp4"
   },
   { 
-    title: "Visual Effects", 
-    description: "Compositing and particle effects mastery",
-    src: "./videos/video4.mp4" 
+    title: "UNASUR Building — Scale Model Visualization",
+    description: "Detailed miniature-scale architectural model showcasing structural form and proportions through controlled lighting and composition.",
+    src: "https://assets.capbraco.com/videos/project-4.mp4"
   },
   { 
-    title: "Product Showcase", 
-    description: "Commercial product visualization and rendering",
-    src: "./videos/video5.mp4" 
+    title: "Dynamic Wheel Simulation — Smoke & Motion",
+    description: "Physics-driven wheel drift simulation with volumetric smoke effects and rotational camera movement.",
+    src: "https://assets.capbraco.com/videos/project-5.mp4"
   },
   { 
-    title: "Creative Work", 
-    description: "Experimental art and innovative techniques",
-    src: "./videos/video6.mp4" 
+    title: "Fluid Simulation Study — Glass Tank",
+    description: "Fluid dynamics showcase featuring object interaction and realistic liquid behavior inside a transparent container.",
+    src: "https://assets.capbraco.com/videos/project-6.mp4"
   },
 ];
+
 
 const Carousel = () => {
   const sliderRef = useRef(null);

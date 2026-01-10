@@ -1,0 +1,36 @@
+# robots.txt for capbraco.com
+# Optimized for SEO visibility
+
+User-agent: *
+Allow: /
+
+# Disallow admin and API endpoints
+Disallow: /admin/
+Disallow: /api/
+
+# Allow search engines to crawl assets
+Allow: /assets/
+Allow: /images/
+
+# Sitemaps
+Sitemap: https://capbraco.com/sitemap.xml
+
+# Crawl delay (optional - only if needed)
+# Crawl-delay: 1
+
+# Specific bot rules
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+# Bad bots (optional)
+User-agent: AhrefsBot
+Crawl-delay: 10
+
+User-agent: SemrushBot
+Crawl-delay: 10

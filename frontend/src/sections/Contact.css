@@ -1,4 +1,4 @@
-/* src/sections/Contact.css - PORTFOLIO IDENTITY */
+/* src/sections/Contact.css - WITH SUCCESS MESSAGE STYLES */
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Fira+Code:wght@400;500&display=swap');
 
 .contact-section {
@@ -11,33 +11,30 @@
   place-items: center;
 }
 
-/* Background grid like original */
+/* Background grid */
 .contact-section::before {
   --size: 45px;
   --line: rgba(255, 255, 255, 0.08);
-
   content: '';
   position: absolute;
-  inset: 0;               /* replaces top/left/width/height */
+  inset: 0;
   width: 100%;
   height: 100%;
-
   background:
     linear-gradient(90deg, var(--line) 1px, transparent 1px var(--size))
       calc(var(--size) * 0.36) 50% / var(--size) var(--size),
     linear-gradient(var(--line) 1px, transparent 1px var(--size))
       0% calc(var(--size) * 0.32) / var(--size) var(--size);
-
   mask: linear-gradient(-20deg, transparent 50%, white);
   pointer-events: none;
   z-index: 0;
 }
+
 .contact-section > * {
   position: relative;
   z-index: 1;
 }
 
-/* Remove particles */
 .contact-particles {
   display: none;
 }
@@ -59,17 +56,8 @@
   max-width: 500px;
 }
 
-.contact-header {
-  margin-bottom: 1rem;
-}
-
-.bracket-left,
-.bracket-right {
-  display: none;
-}
-
 .contact-title {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Playfair Display', serif;
   font-size: clamp(2rem, 5vw, 3.5rem);
   font-weight: 400;
   letter-spacing: -0.05rem;
@@ -79,7 +67,7 @@
 }
 
 .contact-subtitle {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Playfair Display', serif;
   font-size: 1.1rem;
   color: rgba(255, 255, 255, 0.7);
   font-weight: 300;
@@ -101,7 +89,7 @@
 }
 
 .form-group label {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Playfair Display', serif;
   font-size: 0.9rem;
   color: rgba(255, 255, 255, 0.7);
   font-weight: 500;
@@ -109,7 +97,7 @@
 
 .form-group input,
 .form-group textarea {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Playfair Display', serif;
   padding: 0.75rem 1rem;
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.2);
@@ -130,19 +118,156 @@
   color: rgba(255, 255, 255, 0.4);
 }
 
+.form-group input:disabled,
+.form-group textarea:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 .form-group textarea {
   resize: vertical;
   min-height: 120px;
 }
 
 .keypad-hint {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Playfair Display', serif;
   font-size: 0.875rem;
   color: rgba(255, 255, 255, 0.5);
   margin-top: 0.5rem;
 }
 
-/* 3D Keypad Styling - ORIGINAL STRUCTURE */
+/* Status Messages */
+.status-message {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.875rem 1rem;
+  border-radius: 6px;
+  font-family: 'Playfair Display', serif;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+  animation: slideIn 0.3s ease-out;
+}
+
+.error-message {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #fca5a5;
+}
+
+.error-message svg {
+  flex-shrink: 0;
+  color: #ef4444;
+}
+
+.error-message p {
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Success Container */
+.success-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 3rem 1.5rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  animation: fadeInScale 0.5s ease-out;
+}
+
+.success-icon {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  color: #10b981;
+  animation: checkmarkDraw 0.6s ease-out 0.2s both;
+}
+
+.success-icon svg {
+  filter: drop-shadow(0 0 8px rgba(16, 185, 129, 0.4));
+}
+
+.success-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  font-weight: 600;
+  color: #fff;
+  margin: 0 0 1rem 0;
+  letter-spacing: -0.02em;
+}
+
+.success-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.6;
+  margin: 0 0 2rem 0;
+  max-width: 400px;
+}
+
+.success-button {
+  font-family: 'Playfair Display', serif;
+  padding: 0.875rem 1.75rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.success-button:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+.success-button:active {
+  transform: translateY(0);
+}
+
+/* Animations */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes checkmarkDraw {
+  from {
+    opacity: 0;
+    transform: scale(0.8) rotate(-10deg);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+/* 3D Keypad Styling */
 :root {
   --travel: 20;
 }
@@ -154,12 +279,11 @@
   place-items: center;
   width: clamp(280px, 35vw, 400px);
   -webkit-tap-highlight-color: transparent;
-  transition-property: translate, transform;
+  transition-property: translate, transform, opacity;
   transition-duration: 0.26s;
   transition-timing-function: ease-out;
   transform-style: preserve-3d;
   opacity: 0;
-  transition: opacity 0.6s ease-out;
 }
 
 .key {
@@ -169,10 +293,16 @@
   padding: 0;
   cursor: pointer;
   outline: none;
+  transition: opacity 0.3s ease;
+}
+
+.key:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
 }
 
 .key[data-pressed='true'],
-.key:active {
+.key:active:not(:disabled) {
   .key__content {
     translate: 0 calc(var(--travel) * 1%);
   }
@@ -316,24 +446,24 @@
     width: clamp(240px, 70vw, 350px);
   }
 
-  .contact-header {
-    gap: 1rem;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
   .contact-title {
-    font-size: 1.5rem;
-  }
-
-  .bracket-left,
-  .bracket-right {
-    font-size: 1.5rem;
+    font-size: 1.75rem;
   }
 
   .contact-subtitle {
     font-size: 1rem;
-    text-align: left;
+  }
+
+  .success-container {
+    padding: 2rem 1rem;
+  }
+
+  .success-title {
+    font-size: 1.5rem;
+  }
+
+  .success-text {
+    font-size: 1rem;
   }
 }
 
@@ -352,4 +482,33 @@
     font-size: 0.9rem;
     padding: 0.65rem 0.85rem;
   }
+
+  .success-icon {
+    width: 64px;
+    height: 64px;
+  }
+
+  .success-icon svg {
+    width: 48px;
+    height: 48px;
+  }
+}
+.honeypot-field {
+  position: absolute !important;
+  left: -9999px !important;
+  width: 1px !important;
+  height: 1px !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  overflow: hidden !important;
+}
+
+/* Character counter */
+.character-count {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.4);
+  margin-top: 0.25rem;
+  text-align: right;
+  display: block;
 }

@@ -359,6 +359,10 @@
   white-space: nowrap;
   backdrop-filter: blur(4px);
 }
+.project-card__btn a {
+  color: inherit;
+  text-decoration: none;
+}
 
 .project-card__btn:hover {
   background: var(--cyan);
