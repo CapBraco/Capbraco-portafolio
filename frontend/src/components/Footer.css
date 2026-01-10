@@ -269,7 +269,7 @@
 
 .cap-text-card {
   font-family: 'Playfair Display', serif;
-  font-size: 1.7rem;
+  font-size: 1.5rem;
   position: relative;
   right: 4rem;
   bottom: 1.2rem;
@@ -286,14 +286,13 @@
 
 .braco-text-card {
   font-family: 'WindSong', cursive;
-  font-size: 4.2rem;
+  font-size: 3.5rem;
   position: relative;
   bottom: .6rem;
   font-weight: 500;
   color: #888;
   margin: -0.5rem 0 0 0;
   line-height: 1;
-  letter-spacing: 0.02em;
   text-shadow: 
     0 1px 0 rgba(0, 0, 0, 0.3),
     0 2px 0 rgba(0, 0, 0, 0.25);
