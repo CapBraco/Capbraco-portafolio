@@ -1,3 +1,5 @@
+/* Hero.css - WITH MOBILE FADE ANIMATION */
+
 /* Hero that gets captured */
 .intro-section {
   position: fixed;
@@ -10,7 +12,13 @@
   justify-content: center;
   background: linear-gradient(135deg, #f5f5f7 0%, #e6e6e8 100%);
   z-index: 20;
-  transition: 1s ease-in-out;
+  transition: opacity 2s ease-out, transform 2s ease-out;
+}
+
+/* Mobile fade-out animation */
+.intro-section.mobile-fade-out {
+  opacity: 0;
+  transform: scale(0.95);
 }
 
 .intro-content {
@@ -67,6 +75,7 @@ canvas#fire-overlay {
   z-index: 10;
 }
 
+/* Mobile optimizations */
 @media (max-width: 768px) {
   .intro-title h2 {
     font-size: 10vmin;
@@ -81,4 +90,10 @@ canvas#fire-overlay {
     bottom: 6vmin;
     left: 6vmin;
   }
+
+  /* Faster fade on mobile for better performance */
+  .intro-section.mobile-fade-out {
+    transition: opacity 1.5s ease-out, transform 1.5s ease-out;
+  }
 }
+

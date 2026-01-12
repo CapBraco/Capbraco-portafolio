@@ -1,15 +1,35 @@
-// src/components/Hero.jsx
-import { useEffect } from 'react';
+// src/components/Hero.jsx - WITH MOBILE FALLBACK
+import { useEffect, useState } from 'react';
 import './Hero.css';
 
 const Hero = ({ onBurnComplete }) => {
+  const [isMobile, setIsMobile] = useState(false);
+
   useEffect(() => {
-    captureAndBurn(onBurnComplete);
+    // Detect mobile devices
+    const checkMobile = () => {
+      const mobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+      const smallScreen = window.innerWidth <= 768;
+      const touchDevice = 'ontouchstart' in window;
+      
+      return mobile || (smallScreen && touchDevice);
+    };
+
+    const mobile = checkMobile();
+    setIsMobile(mobile);
+
+    if (mobile) {
+      // Mobile: Simple fade out animation
+      mobileFadeTransition(onBurnComplete);
+    } else {
+      // Desktop: Fire effect
+      captureAndBurn(onBurnComplete);
+    }
   }, [onBurnComplete]);
 
   return (
     <>
-      {/* Hero that gets captured and burned */}
+      {/* Hero that gets captured and burned (or faded on mobile) */}
       <div id="intro-capture" className="intro-section">
         <div className="intro-content">
           <div className="intro-title">
@@ -20,12 +40,31 @@ const Hero = ({ onBurnComplete }) => {
         </div>
       </div>
 
-      {/* Fire overlay canvas */}
-      <canvas id="fire-overlay"></canvas>
+      {/* Fire overlay canvas (desktop only) */}
+      {!isMobile && <canvas id="fire-overlay"></canvas>}
     </>
   );
 };
 
+// MOBILE: Simple fade transition
+function mobileFadeTransition(onComplete) {
+  const heroElement = document.getElementById('intro-capture');
+  if (!heroElement) return;
+
+  // Wait a bit for fonts to load
+  setTimeout(() => {
+    // Add fade-out class
+    heroElement.classList.add('mobile-fade-out');
+    
+    // Wait for animation to complete
+    setTimeout(() => {
+      heroElement.style.display = 'none';
+      if (onComplete) onComplete();
+    }, 2000); // Match CSS animation duration
+  }, 1500); // Show for 1.5 seconds first
+}
+
+// DESKTOP: Fire effect (your existing code)
 async function captureAndBurn(onComplete) {
   const canvasEl = document.getElementById('fire-overlay');
   const heroElement = document.getElementById('intro-capture');
@@ -106,110 +145,115 @@ async function captureAndBurn(onComplete) {
   const gl = canvasEl.getContext('webgl') || canvasEl.getContext('experimental-webgl');
 
   if (!gl) {
-    console.warn('WebGL not supported');
+    console.warn('WebGL not supported, using fallback');
+    mobileFadeTransition(onComplete);
+    return;
+  }
+
+  try {
+    const html2canvas = (await import('html2canvas')).default;
+    const heroCanvas = await html2canvas(heroElement, {
+      backgroundColor: '#f5f5f7',
+      scale: 2,
+      logging: false
+    });
+
     heroElement.style.display = 'none';
-    if (onComplete) onComplete();
-    return;
-  }
 
-  const html2canvas = (await import('html2canvas')).default;
-  const heroCanvas = await html2canvas(heroElement, {
-    backgroundColor: '#f5f5f7',
-    scale: 2,
-    logging: false
-  });
-
-  heroElement.style.display = 'none';
-
-  function createShader(type, source) {
-    const shader = gl.createShader(type);
-    gl.shaderSource(shader, source);
-    gl.compileShader(shader);
-    if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
-      console.error('Shader error:', gl.getShaderInfoLog(shader));
-      return null;
+    function createShader(type, source) {
+      const shader = gl.createShader(type);
+      gl.shaderSource(shader, source);
+      gl.compileShader(shader);
+      if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+        console.error('Shader error:', gl.getShaderInfoLog(shader));
+        return null;
+      }
+      return shader;
     }
-    return shader;
-  }
 
-  const vertexShader = createShader(gl.VERTEX_SHADER, vertexShaderSource);
-  const fragmentShader = createShader(gl.FRAGMENT_SHADER, fragmentShaderSource);
+    const vertexShader = createShader(gl.VERTEX_SHADER, vertexShaderSource);
+    const fragmentShader = createShader(gl.FRAGMENT_SHADER, fragmentShaderSource);
 
-  const program = gl.createProgram();
-  gl.attachShader(program, vertexShader);
-  gl.attachShader(program, fragmentShader);
-  gl.linkProgram(program);
+    const program = gl.createProgram();
+    gl.attachShader(program, vertexShader);
+    gl.attachShader(program, fragmentShader);
+    gl.linkProgram(program);
 
-  if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
-    console.error('Program error:', gl.getProgramInfoLog(program));
-    return;
-  }
-
-  gl.useProgram(program);
-
-  uniforms = {
-    u_resolution: gl.getUniformLocation(program, 'u_resolution'),
-    u_progress: gl.getUniformLocation(program, 'u_progress'),
-    u_time: gl.getUniformLocation(program, 'u_time'),
-    u_text: gl.getUniformLocation(program, 'u_text')
-  };
-
-  textTexture = gl.createTexture();
-  gl.bindTexture(gl.TEXTURE_2D, textTexture);
-  gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, heroCanvas);
-  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
-  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
-  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
-
-  gl.clearColor(1.0, 1.0, 1.0, 1.0);
-  gl.clear(gl.COLOR_BUFFER_BIT);
-
-  const vertices = new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]);
-  const vertexBuffer = gl.createBuffer();
-  gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
-  gl.bufferData(gl.ARRAY_BUFFER, vertices, gl.STATIC_DRAW);
-
-  const positionLocation = gl.getAttribLocation(program, 'a_position');
-  gl.enableVertexAttribArray(positionLocation);
-  gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);
-
-  function resizeCanvas() {
-    canvasEl.width = window.innerWidth * devicePixelRatio;
-    canvasEl.height = window.innerHeight * devicePixelRatio;
-    gl.viewport(0, 0, canvasEl.width, canvasEl.height);
-    gl.uniform2f(uniforms.u_resolution, canvasEl.width, canvasEl.height);
-  }
-
-  function easeInOut(t) {
-    return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
-  }
-
-  function render() {
-    const currentTime = performance.now();
-    const elapsed = (currentTime - startTime) / 7000;
-
-    if (elapsed <= 1) {
-      animationProgress = 0.3 + 0.7 * easeInOut(elapsed);
-    } else {
-      canvasEl.style.display = 'none';
-      if (onComplete) onComplete();
+    if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+      console.error('Program error:', gl.getProgramInfoLog(program));
+      mobileFadeTransition(onComplete);
       return;
     }
 
-    gl.uniform1f(uniforms.u_time, currentTime);
-    gl.uniform1f(uniforms.u_progress, animationProgress);
+    gl.useProgram(program);
 
-    gl.activeTexture(gl.TEXTURE0);
+    uniforms = {
+      u_resolution: gl.getUniformLocation(program, 'u_resolution'),
+      u_progress: gl.getUniformLocation(program, 'u_progress'),
+      u_time: gl.getUniformLocation(program, 'u_time'),
+      u_text: gl.getUniformLocation(program, 'u_text')
+    };
+
+    textTexture = gl.createTexture();
     gl.bindTexture(gl.TEXTURE_2D, textTexture);
-    gl.uniform1i(uniforms.u_text, 0);
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, heroCanvas);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
 
-    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
-    requestAnimationFrame(render);
+    gl.clearColor(1.0, 1.0, 1.0, 1.0);
+    gl.clear(gl.COLOR_BUFFER_BIT);
+
+    const vertices = new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]);
+    const vertexBuffer = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
+    gl.bufferData(gl.ARRAY_BUFFER, vertices, gl.STATIC_DRAW);
+
+    const positionLocation = gl.getAttribLocation(program, 'a_position');
+    gl.enableVertexAttribArray(positionLocation);
+    gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);
+
+    function resizeCanvas() {
+      canvasEl.width = window.innerWidth * devicePixelRatio;
+      canvasEl.height = window.innerHeight * devicePixelRatio;
+      gl.viewport(0, 0, canvasEl.width, canvasEl.height);
+      gl.uniform2f(uniforms.u_resolution, canvasEl.width, canvasEl.height);
+    }
+
+    function easeInOut(t) {
+      return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+    }
+
+    function render() {
+      const currentTime = performance.now();
+      const elapsed = (currentTime - startTime) / 7000;
+
+      if (elapsed <= 1) {
+        animationProgress = 0.3 + 0.7 * easeInOut(elapsed);
+      } else {
+        canvasEl.style.display = 'none';
+        if (onComplete) onComplete();
+        return;
+      }
+
+      gl.uniform1f(uniforms.u_time, currentTime);
+      gl.uniform1f(uniforms.u_progress, animationProgress);
+
+      gl.activeTexture(gl.TEXTURE0);
+      gl.bindTexture(gl.TEXTURE_2D, textTexture);
+      gl.uniform1i(uniforms.u_text, 0);
+
+      gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+      requestAnimationFrame(render);
+    }
+
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+    render();
+  } catch (error) {
+    console.error('Fire effect error:', error);
+    mobileFadeTransition(onComplete);
   }
-
-  resizeCanvas();
-  window.addEventListener('resize', resizeCanvas);
-  render();
 }
 
 export default Hero;
