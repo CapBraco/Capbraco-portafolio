@@ -1,4 +1,4 @@
-// src/sections/Carousel.jsx
+// src/sections/Carousel.jsx - FIXED: Videos load after Hero completes
 import React, { useRef, useState, useEffect } from "react";
 import { FaChevronLeft, FaChevronRight, FaPlay, FaPause } from 'react-icons/fa';
 import './Carousel.css';
@@ -36,16 +36,40 @@ const VIDEOS = [
   },
 ];
 
-
 const Carousel = () => {
   const sliderRef = useRef(null);
   const [isPaused, setIsPaused] = useState(false);
   const [hoveredIndex, setHoveredIndex] = useState(null);
+  const [canLoadVideos, setCanLoadVideos] = useState(false); // NEW: Control video loading
   const scrollAmount = 400;
+
+  // NEW: Wait for Hero to complete before loading videos
+  useEffect(() => {
+    console.log('⏳ Carousel mounted - waiting for Hero to complete...');
+    
+    // Listen for Hero completion event
+    const handleHeroComplete = () => {
+      console.log('✅ Hero complete - loading carousel videos');
+      setCanLoadVideos(true);
+    };
+
+    window.addEventListener('heroComplete', handleHeroComplete);
+
+    // Fallback: Load after 6 seconds anyway (in case event doesn't fire)
+    const fallbackTimer = setTimeout(() => {
+      console.log('⏱️ Fallback timer - loading carousel videos');
+      setCanLoadVideos(true);
+    }, 6000);
+
+    return () => {
+      window.removeEventListener('heroComplete', handleHeroComplete);
+      clearTimeout(fallbackTimer);
+    };
+  }, []);
 
   // Auto-scroll effect
   useEffect(() => {
-    if (isPaused) return;
+    if (isPaused || !canLoadVideos) return; // Don't auto-scroll until videos can load
 
     const interval = setInterval(() => {
       if (sliderRef.current) {
@@ -60,7 +84,7 @@ const Carousel = () => {
     }, 30);
 
     return () => clearInterval(interval);
-  }, [isPaused]);
+  }, [isPaused, canLoadVideos]);
 
   const scrollLeft = () => {
     sliderRef.current.scrollBy({ left: -scrollAmount, behavior: "smooth" });
@@ -145,14 +169,22 @@ const Carousel = () => {
                   onMouseLeave={handleVideoLeave}
                 >
                   <div className="video-container storm-frame">
-                    <video 
-                      src={video.src}
-                      loading="lazy"
-                      autoPlay
-                      muted 
-                      loop
-                      playsInline
-                    />
+                    {/* FIXED: Only render video after Hero completes */}
+                    {canLoadVideos ? (
+                      <video 
+                        src={video.src}
+                        loading="lazy"
+                        autoPlay
+                        muted 
+                        loop
+                        playsInline
+                      />
+                    ) : (
+                      // Show placeholder while waiting
+                      <div className="video-placeholder">
+                        <div className="loading-spinner"></div>
+                      </div>
+                    )}
                     
                     {/* Video info overlay */}
                     <div className="video-info-overlay">

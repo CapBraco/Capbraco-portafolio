@@ -59,6 +59,11 @@ function mobileFadeTransition(onComplete) {
     // Wait for animation to complete
     setTimeout(() => {
       heroElement.style.display = 'none';
+      
+      // Dispatch event to notify videos can load
+      window.dispatchEvent(new Event('heroComplete'));
+      console.log('🔥 Hero mobile fade complete - videos can load now');
+      
       if (onComplete) onComplete();
     }, 2000); // Match CSS animation duration
   }, 1500); // Show for 1.5 seconds first
@@ -72,7 +77,7 @@ async function captureAndBurn(onComplete) {
   if (!canvasEl || !heroElement) return;
 
   await document.fonts.ready;
-  await new Promise(resolve => setTimeout(resolve, 50));
+  await new Promise(resolve => setTimeout(resolve, 100));
 
   const devicePixelRatio = Math.min(window.devicePixelRatio, 2);
   let startTime = performance.now();
@@ -232,6 +237,11 @@ async function captureAndBurn(onComplete) {
         animationProgress = 0.3 + 0.7 * easeInOut(elapsed);
       } else {
         canvasEl.style.display = 'none';
+        
+        // Dispatch event to notify videos can load
+        window.dispatchEvent(new Event('heroComplete'));
+        console.log('🔥 Hero fire effect complete - videos can load now');
+        
         if (onComplete) onComplete();
         return;
       }
