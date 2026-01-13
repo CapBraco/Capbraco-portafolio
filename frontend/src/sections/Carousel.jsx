@@ -147,9 +147,7 @@ const Carousel = () => {
                   <div className="video-container storm-frame">
                     <video 
                       src={video.src}
-                      preload="none" 
                       loading="lazy"
-
                       autoPlay
                       muted 
                       loop
