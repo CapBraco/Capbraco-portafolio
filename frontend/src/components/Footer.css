@@ -921,6 +921,9 @@
     width: 16rem;
     height: 21rem;
   }
+  .braco-text-card {
+    font-size: 3.2rem;
+  }
 }
 
 /* Responsive - Mobile */
@@ -971,7 +974,7 @@
     justify-content: center;
   }
   .braco-text-card {
-    font-size: 3.2rem;
+    font-size: 3rem;
   }
 }
 

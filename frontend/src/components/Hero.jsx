@@ -72,7 +72,7 @@ async function captureAndBurn(onComplete) {
   if (!canvasEl || !heroElement) return;
 
   await document.fonts.ready;
-  await new Promise(resolve => setTimeout(resolve, 100));
+  await new Promise(resolve => setTimeout(resolve, 50));
 
   const devicePixelRatio = Math.min(window.devicePixelRatio, 2);
   let startTime = performance.now();
